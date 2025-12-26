@@ -1,0 +1,52 @@
+<?php
+
+use Magento\Framework\Escaper;
+use Magento\Wishlist\Block\Customer\Wishlist\Items;
+use Hyva\Theme\ViewModel\ProductListItem;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Items $block */
+$columns = $block->getColumns();
+$productListItemViewModel = $viewModels->require(ProductListItem::class);
+$viewMode = "list";
+$templateType     = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+$imageDisplayArea = 'category_page_list';
+$showDescription  = false;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productFactory = $objectManager->get(\Magento\Catalog\Model\ProductFactory::class);
+$sliderItemRenderer = $block->getLayout()->getBlock('product_list_item')
+    ?: $block->getChildBlock('slider.item.template')
+    ?: $block->getLayout()->createBlock(Template::class);
+?>
+
+<div class="products-grid wishlist lg:pl-8" x-data="{isLoading:false}" @wishlist-loader-show.window="isLoading=true;" @wishlist-loader-hide.window="isLoading=false;">
+    <?= $block->getLayout()->createBlock(\Magento\Framework\View\Element\Template::class)->setTemplate('Hyva_Theme::ui/loading.phtml')->toHtml() ?>
+    <?php if (count($block->getItems())): ?>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php foreach ($block->getItems() as $item): ?>
+                <?php
+                $product = $productFactory->create()->load($item->getProductId());
+                $product->setData('wishlist_item', $item);
+                echo $productListItemViewModel->getItemHtmlWithRenderer(
+                    $sliderItemRenderer,
+                    $product,
+                    $block,
+                    $viewMode,
+                    $templateType,
+                    $imageDisplayArea,
+                    $showDescription
+                );
+                ?>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?= $escaper->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column): ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>

@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block */
+$columns = $block->getColumns();
+?>
+
+<div class="products-grid wishlist">
+    <?php if (count($block->getItems())) : ?>
+        <ol class="product-items">
+            <?php foreach ($block->getItems() as $item) : ?>
+                <li data-row="product-item" class="product-item" id="item_<?= $block->escapeHtmlAttr($item->getId()) ?>" data-item-id="<?= $block->escapeHtmlAttr($item->getId()) ?>">
+                    <div class="product-item-info" data-container="product-grid">
+                        <?php foreach ($columns as $column) : ?>
+                            <?php
+                            if ($column->getNameInLayout() == "category.product.type.details.renderers.configurable") {
+                                $column->setData('product', $item->getProduct());
+                            }
+                            ?>
+                            <?= $column->setItem($item)->toHtml(); ?>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php else : ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column) : ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>
+
+<script>
+    require(['jquery'], function($) {
+        $(document).on('click', '.product-items .product-item button[data-role="tocart"]', function(event) {
+            let dataPost = $(this).data('post');
+            let isValid = true;
+            debugger;
+            $(this).closest('.product-item').find(`input[name^="super_attribute"]`).each((index, element) => {
+                if (!$(element).valid()) {
+                    isValid = false;
+                }
+                if ($(element).attr('name').length) {
+                    dataPost.data[$(element).attr('name')] = $(element).val();
+                    // dataPost.data.product = $(element).parent().attr('data-attribute-id');
+                    dataPost.data.links_purchased_separately = true;
+                }
+            })
+            if (isValid) {
+                $(this).attr('data-post', JSON.stringify(dataPost));
+            } else {
+                event.stopImmediatePropagation();
+            }
+        });
+    });
+</script>

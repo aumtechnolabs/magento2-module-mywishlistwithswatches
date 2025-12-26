@@ -1,0 +1,40 @@
+{
+  "name": "aumtechnolabs/module-mywishlistwithswatches",
+  "description": "Magento 2 Swatch Selector for Wishlist",
+  "type": "magento2-module",
+  "license": "GPL-3.0",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Aum Technolabs",
+      "homepage": "https://aumtechnolabs.com/",
+      "role": "Owner"
+    }
+  ],
+  "minimum-stability": "dev",
+  "keywords": [
+    "magento",
+    "magento 2",
+    "magento 2 wishlist",
+    "magento wishlist",
+    "magento 2 swatches",
+    "magento swatches",
+    "magento 2 Configurable Options in My Wishlist Page",
+    "magento Configurable Options in My Wishlist Page",
+    "magento 2 Swatches in My Wishlist Page",
+    "magento Swatches in My Wishlist Page"
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "magento/framework": "*",
+    "magento/product-community-edition": ">=2.4.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "AumTechnolabs\\MyWishlistWithSwatches\\": ""
+    }
+  }
+}
