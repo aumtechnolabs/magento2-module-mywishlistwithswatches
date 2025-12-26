@@ -1,4 +1,3 @@
-````md
 # Magento 2 Swatch Selector for Wishlist (Hyvä-Compatible)
 
 ## Overview
@@ -103,6 +102,3 @@ Magento 2 wishlist swatch selector, configurable product wishlist, Hyvä Themes 
 ## License
 
 This module is open-source and distributed under the **GNU General Public License (GPL)**.
-
-```
-```
