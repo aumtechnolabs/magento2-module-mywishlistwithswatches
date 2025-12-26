@@ -11,9 +11,9 @@ The module is **AJAX-powered, lightweight**, and **fully compatible with Hyvä T
 ## Compatibility & Technology
 
 <p align="left">
-  <img src="assets/hyva.svg" alt="Hyvä Themes Compatible" height="36"/>
-  <img src="assets/magento.svg" alt="Magento 2 Compatible" height="36"/>
-  <img src="assets/aum-technolabs.svg" alt="Aum Technolabs" height="36"/>
+  <img src="https://github.com/user-attachments/assets/c33440d7-febc-44d2-add9-09c6c7d65ed5" alt="Hyvä Themes Compatible" height="36"/>
+  <img src="https://github.com/user-attachments/assets/05eaf100-03f9-410e-ac8c-8c237e3d0381" alt="Magento 2 Compatible" height="36"/>
+  <img src="https://github.com/user-attachments/assets/144b3f1a-70a5-40c0-baac-281472d24dfd" alt="Aum Technolabs" height="36"/>
 </p>
 
 ---
